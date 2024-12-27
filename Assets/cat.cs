@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Cat : MonoBehaviour
 {
+    public GameManager gameManager;
+    public int life = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +34,23 @@ public class Cat : MonoBehaviour
         // 判斷碰撞的碰撞體有沒有帶有標籤「Arrow」
         if (collision.gameObject.tag == "Arrow")
         {
-            Destroy(gameObject);
+            gameManager.DecreaseHp();
+            life -= 1;
+            if (life <= 0)
+                Destroy(gameObject);
         }
     }
+
+    // 當玩家按下畫面左按鍵時，貓咪往左移動「3」
+    public void LButtonDown()
+    {
+        transform.Translate(-3, 0, 0);
+    }
+
+    // 當玩家按下畫面右按鍵時，貓咪往右移動「3」
+    public void RButtonDown()
+    {
+        transform.Translate(3, 0, 0);
+    }
+
 }
