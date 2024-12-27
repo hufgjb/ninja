@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject arrowPrefab; //置放Prefab的變數
     float span = 1.0f; //時間間隔
     float delta = 0; //現在已經累積的時間
+
+    public Image hpGauge;
 
     void Update()
     {
@@ -17,5 +20,9 @@ public class GameManager : MonoBehaviour
             int px = Random.Range(-6, 7); // 隨機產生一個-6到7之間的數字
             Instantiate(arrowPrefab, new Vector3(px, 7, 0), Quaternion.identity); // 產生箭頭物件
         }
+    }
+    public void DecreaseHp()
+    {
+        hpGauge.GetComponent<Image>().fillAmount -= 0.1f;
     }
 }
